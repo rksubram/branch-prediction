@@ -62,14 +62,14 @@ class Statistics:
     Track Branch Prediction Statistics
     """
     def __init__(self,stream_list,types):
-        self.branches = 0
         self.pc = 0
         self.outcome = 0
         self.file_number=0
         self.stream_list = stream_list
-        self.type = types
+        self.type = type
+        self.store_accuracy =dict()
     
-    def make_prediction(self,pc_val,outcome_val):
+    def make_prediction(self, pc_val, outcome_val):
         if self.type[0]==Pred_types[0]:
             if self.stype[t]=='NT':
                 return [0]* len(outcome_val)
@@ -81,8 +81,6 @@ class Statistics:
             print("NOT ACCRURAYE")
 
     def update_stats(self):
-        self.branches+=1
-        store_accuracy=dict()
         for files in self.stream_list:
             pc_list=[]
             outcome_list=[]
@@ -91,12 +89,8 @@ class Statistics:
                 outcome = str(line.split()[1]).replace("'","").replace("b","")
                 self.pc =str2hex(pc)
                 self.outcome=int(outcome,16)
-                self.branches+=1
-                pc_list.append(self.pc)
-                outcome_list.append(self.outcome)
-            prediction=make_prediction(pc_list,outcome_list)
-            store_accuracy[files]=calculate_accuracy(prediction,outcome_list)
-            self.file_number+=1
+                prediction=make_prediction(self.pc,self.outcome)
+                if predic
         assert self.file_number==len(self.stream_list), "Some files could not be processed"
         return store_accuracy
 
