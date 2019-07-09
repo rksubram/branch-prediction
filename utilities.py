@@ -109,18 +109,6 @@ class Statistics:
         return float(mispred/len(a))
 
 
-    """
-      // Make a prediction and compare with actual outcome
-      uint8_t prediction = make_prediction(pc);
-      if (prediction != outcome) {
-        mispredictions++;
-      }
-      if (verbose != 0) {
-        printf ("%d\n", prediction);
-      }
-    """
-
-
 if __name__ == "__main__":
     
     # parse user arguments
